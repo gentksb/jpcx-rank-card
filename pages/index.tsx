@@ -46,7 +46,7 @@ export default function Home() {
               URL sample
             </Heading>
             <Code>
-              https://localhost:3000/ajoccRankCard.png?ajoccCode={ajoccCode}
+              https://hostname/ajoccRankCard.png?ajoccCode={ajoccCode}
             </Code>
           </>
         ) : (
