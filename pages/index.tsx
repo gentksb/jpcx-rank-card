@@ -50,7 +50,7 @@ export default function Home() {
               URL sample
             </Heading>
             <Code>
-              https://jpcx-rank-card-qc0vyqkfy-gentksb.vercel.app/ajoccRankCard.png?ajoccCode=
+              https://jpcx-rank-card.vercel.app/ajoccRankCard.png?ajoccCode=
               {urlQuery}
             </Code>
           </>
