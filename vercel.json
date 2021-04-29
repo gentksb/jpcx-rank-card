@@ -1,5 +1,10 @@
 {
   "rewrites": [
     { "source": "/ajoccRankCard.png", "destination": "/api/createCard" }
-  ]
+  ],
+  "functions": {
+    "api/createCard.ts": {
+      "includeFiles": "pages/api/assets/**"
+    }
+  }
 }
