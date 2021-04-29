@@ -3,7 +3,7 @@
     { "source": "/ajoccRankCard.png", "destination": "/api/createCard" }
   ],
   "functions": {
-    "api/createCard.ts": {
+    "api/createCard.js": {
       "includeFiles": "pages/api/assets/**"
     }
   }
