@@ -9,11 +9,15 @@
   },
   "dependencies": {
     "canvas": "^2.7.0",
+    "jsdom": "^16.5.3",
     "next": "10.x",
+    "node-fetch": "^2.6.1",
     "react": "17.x",
     "react-dom": "17.x"
   },
   "devDependencies": {
+    "@types/jsdom": "^16.2.10",
+    "@types/node-fetch": "^2.5.10",
     "@types/react": "^17.0.4",
     "@typescript-eslint/eslint-plugin": "^4.22.0",
     "@typescript-eslint/parser": "^4.22.0",
