@@ -1,0 +1,5 @@
+{
+  "rewrites": [
+    { "source": "/ajoccRankCard.png", "destination": "/api/createCard" }
+  ]
+}

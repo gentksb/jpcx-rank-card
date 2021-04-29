@@ -8,7 +8,11 @@
     "start": "next start"
   },
   "dependencies": {
+    "@chakra-ui/react": "^1.6.0",
+    "@emotion/react": "^11.1.5",
+    "@emotion/styled": "^11.3.0",
     "canvas": "^2.7.0",
+    "framer-motion": "^4.1.11",
     "jsdom": "^16.5.3",
     "next": "10.x",
     "node-fetch": "^2.6.1",

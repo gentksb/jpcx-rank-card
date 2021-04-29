@@ -1,9 +1,13 @@
 import { VercelRequest, VercelResponse } from "@vercel/node"
 import { createCanvas, loadImage } from "canvas"
+import { memo } from "react"
 import { getAjoccRankingData } from "./utils/getAjoccRankingData"
 
 export default async (request: VercelRequest, response: VercelResponse) => {
   const { ajoccCode, showRealName, showTeamName } = request.query
+  const timestamp = new Date()
+  const timeRecord = `${timestamp.getUTCFullYear()}.${timestamp.getMonth()}.${timestamp.getDate()}`
+
   const colorMap = {
     C1: "#f56565",
     C2: "#ed8936",
@@ -62,9 +66,18 @@ export default async (request: VercelRequest, response: VercelResponse) => {
       const rankingFontStyle = {
         font: 'bold 44px "Noto Sans"'
       }
+      const memoFontStyle = {
+        font: 'thin 8px "Noto Sans"'
+      }
       ctx.fillStyle = "#6f6f6f"
       ctx.font = titleFontStyle.font
       ctx.fillText(`AJOCC RIDER DATA`, 15, 40)
+      ctx.font = memoFontStyle.font
+      ctx.fillText(
+        `AJOCC CODE: ${racerData.racerInfoData.ajoccCode} at ${timeRecord}`,
+        10,
+        160
+      )
       ctx.fillStyle = "#111111"
       ctx.font = bodyFontStyle.font
       ctx.fillText(`Category`, 35, 80)
