@@ -45,11 +45,11 @@ export default async (request: VercelRequest, response: VercelResponse) => {
       ctx.fill()
 
       if (racerData.ajoccRankingData[0].seasonRank === "1") {
-        const crownImage = await loadImage("./assets/crown.svg")
-        ctx.drawImage(crownImage, 230, 100, 45, 45)
+        const crownImage = await loadImage("./pages/api/assets/crown.svg")
+        ctx.drawImage(crownImage, 185, 40, 120, 120)
       } else {
-        const rankImage = await loadImage("./assets/rank.svg")
-        ctx.drawImage(rankImage, 230, 100, 45, 45)
+        const rankImage = await loadImage("./pages/api/assets/rank.svg")
+        ctx.drawImage(rankImage, 195, 40, 120, 120)
       }
 
       //文字
@@ -57,7 +57,7 @@ export default async (request: VercelRequest, response: VercelResponse) => {
         font: 'bold 30px "Noto Sans"'
       }
       const bodyFontStyle = {
-        font: 'bold 18px "Noto Sans CJK JP"'
+        font: 'bold 18px "Noto Sans"'
       }
       const rankingFontStyle = {
         font: 'bold 44px "Noto Sans"'
@@ -67,8 +67,8 @@ export default async (request: VercelRequest, response: VercelResponse) => {
       ctx.fillText(`AJOCC RIDER DATA`, 15, 40)
       ctx.fillStyle = "#111111"
       ctx.font = bodyFontStyle.font
-      ctx.fillText(`カテゴリー`, 35, 80)
-      ctx.fillText(`ランキング`, 200, 80)
+      ctx.fillText(`Category`, 35, 80)
+      ctx.fillText(`Ranking`, 200, 80)
       ctx.font = rankingFontStyle.font
       ctx.fillText(`${racerData?.racerInfoData.category}`, 50, 120)
       ctx.fillText(`${racerData?.ajoccRankingData[0].seasonRank}`, 230, 120)
