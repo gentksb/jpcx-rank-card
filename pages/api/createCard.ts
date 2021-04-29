@@ -31,7 +31,7 @@ export default async (request: VercelRequest, response: VercelResponse) => {
       response.status(400).send("Invalid AJOCC Code")
       return
     } else {
-      registerFont("./pages/api/assets/NotoSans-Regular.ttf", {
+      registerFont("./assets/NotoSans-Regular.ttf", {
         family: "Noto Sans"
       })
 
@@ -54,10 +54,10 @@ export default async (request: VercelRequest, response: VercelResponse) => {
       ctx.fill()
 
       if (racerData.ajoccRankingData[0].seasonRank === "1") {
-        const crownImage = await loadImage("./pages/api/assets/crown.svg")
+        const crownImage = await loadImage("./assets/crown.svg")
         ctx.drawImage(crownImage, 185, 40, 120, 120)
       } else {
-        const rankImage = await loadImage("./pages/api/assets/rank.svg")
+        const rankImage = await loadImage("./assets/rank.svg")
         ctx.drawImage(rankImage, 195, 40, 120, 120)
       }
 
