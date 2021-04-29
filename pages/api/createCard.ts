@@ -1,6 +1,5 @@
 import { VercelRequest, VercelResponse } from "@vercel/node"
-import { createCanvas, loadImage } from "canvas"
-import { memo } from "react"
+import { createCanvas, loadImage, registerFont } from "canvas"
 import { getAjoccRankingData } from "./utils/getAjoccRankingData"
 
 export default async (request: VercelRequest, response: VercelResponse) => {
@@ -32,6 +31,10 @@ export default async (request: VercelRequest, response: VercelResponse) => {
       response.status(400).send("Invalid AJOCC Code")
       return
     } else {
+      registerFont("./pages/api/assets/NotoSans-Regular.ttf", {
+        family: "Noto Sans"
+      })
+
       const canvas = createCanvas(350, 165)
       const ctx = canvas.getContext("2d")
       console.log(racerData)
