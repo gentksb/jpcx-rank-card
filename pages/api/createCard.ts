@@ -1,6 +1,7 @@
 import { VercelRequest, VercelResponse } from "@vercel/node"
 import { createCanvas, loadImage, registerFont } from "canvas"
 import { getAjoccRankingData } from "./utils/getAjoccRankingData"
+import path from "path"
 
 export default async (request: VercelRequest, response: VercelResponse) => {
   const { ajoccCode, showRealName, showTeamName } = request.query
@@ -31,7 +32,7 @@ export default async (request: VercelRequest, response: VercelResponse) => {
       response.status(400).send("Invalid AJOCC Code")
       return
     } else {
-      registerFont("./pages/api/assets/NotoSans-Regular.ttf", {
+      registerFont(path.resolve("./public/assets/NotoSans-Regular.ttf"), {
         family: "Noto Sans"
       })
 
@@ -54,10 +55,14 @@ export default async (request: VercelRequest, response: VercelResponse) => {
       ctx.fill()
 
       if (racerData.ajoccRankingData[0].seasonRank === "1") {
-        const crownImage = await loadImage("./pages/api/assets/crown.svg")
+        const crownImage = await loadImage(
+          path.resolve("./public/assets/crown.svg")
+        )
         ctx.drawImage(crownImage, 185, 40, 120, 120)
       } else {
-        const rankImage = await loadImage("./pages/api/assets/rank.svg")
+        const rankImage = await loadImage(
+          path.resolve("./public/assets/rank.svg")
+        )
         ctx.drawImage(rankImage, 195, 40, 120, 120)
       }
 
