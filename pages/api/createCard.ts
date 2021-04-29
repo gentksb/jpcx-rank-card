@@ -1,9 +1,19 @@
 import { VercelRequest, VercelResponse } from "@vercel/node"
-import { createCanvas } from "canvas"
+import { createCanvas, loadImage } from "canvas"
 import { getAjoccRankingData } from "./utils/getAjoccRankingData"
 
 export default async (request: VercelRequest, response: VercelResponse) => {
   const { ajoccCode, showRealName, showTeamName } = request.query
+  const colorMap = {
+    C1: "#f56565",
+    C2: "#ed8936",
+    C3: "#48bb78",
+    CM1: "#ed64a6",
+    CM2: "#9f7aea",
+    CM3: "#667eea",
+    L1: "#f56565",
+    L2: "#ed8936"
+  }
 
   if (ajoccCode === undefined) {
     response.status(400).send("'ajoccCode' is requied in the query string.")
@@ -14,28 +24,59 @@ export default async (request: VercelRequest, response: VercelResponse) => {
     return
   } else {
     const racerData = await getAjoccRankingData({ ajoccCode: ajoccCode })
-    const canvas = createCanvas(350, 165)
-    const ctx = canvas.getContext("2d")
-    const titleFontStyle = {
-      font: 'bold 32px "Noto Sans CJK JP"'
-    }
-    const bodyFontStyle = {
-      font: 'bold 18px "Noto Sans CJK JP"'
-    }
-    ctx.font = titleFontStyle.font
-    ctx.fillText(`AJOCC Rider Data`, 20, 40)
-    ctx.font = bodyFontStyle.font
-    ctx.fillText(`Category : ${racerData?.racerInfoData["カテゴリー"]}`, 20, 80)
-    console.log(racerData)
-    ctx.fillText(
-      `最新ランキング : ${racerData?.ajoccRankingData[0].rank}`,
-      20,
-      100
-    )
+    if (racerData === undefined) {
+      response.status(400).send("Invalid AJOCC Code")
+      return
+    } else {
+      const canvas = createCanvas(350, 165)
+      const ctx = canvas.getContext("2d")
+      console.log(racerData)
+      //背景
+      ctx.fillStyle = "#fafaf6"
+      ctx.fillRect(0, 0, 350, 165)
 
-    const resultBuffer = canvas.toBuffer("image/png")
+      //背景円
+      ctx.fillStyle = colorMap[racerData?.racerInfoData.category] ?? "#38b2ac"
+      ctx.strokeStyle = colorMap[racerData?.racerInfoData.category] ?? "#38b2ac"
+      ctx.lineWidth = 5
+      ctx.beginPath()
+      ctx.arc(80, 100, 45, 0, 2 * Math.PI)
+      ctx.closePath()
+      ctx.fill()
 
-    response.setHeader("content-type", "image/png")
-    response.status(200).send(resultBuffer)
+      if (racerData.ajoccRankingData[0].seasonRank === "1") {
+        const crownImage = await loadImage("./assets/crown.svg")
+        ctx.drawImage(crownImage, 230, 100, 45, 45)
+      } else {
+        const rankImage = await loadImage("./assets/rank.svg")
+        ctx.drawImage(rankImage, 230, 100, 45, 45)
+      }
+
+      //文字
+      const titleFontStyle = {
+        font: 'bold 30px "Noto Sans"'
+      }
+      const bodyFontStyle = {
+        font: 'bold 18px "Noto Sans CJK JP"'
+      }
+      const rankingFontStyle = {
+        font: 'bold 44px "Noto Sans"'
+      }
+      ctx.fillStyle = "#6f6f6f"
+      ctx.font = titleFontStyle.font
+      ctx.fillText(`AJOCC RIDER DATA`, 15, 40)
+      ctx.fillStyle = "#111111"
+      ctx.font = bodyFontStyle.font
+      ctx.fillText(`カテゴリー`, 35, 80)
+      ctx.fillText(`ランキング`, 200, 80)
+      ctx.font = rankingFontStyle.font
+      ctx.fillText(`${racerData?.racerInfoData.category}`, 50, 120)
+      ctx.fillText(`${racerData?.ajoccRankingData[0].seasonRank}`, 230, 120)
+
+      const resultBuffer = canvas.toBuffer("image/png")
+
+      response.setHeader("content-type", "image/png")
+      response.status(200).send(resultBuffer)
+    }
   }
 }

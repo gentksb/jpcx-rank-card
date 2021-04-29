@@ -45,4 +45,4 @@ cm2 #9f7aea
 cm3 #667eea
 l1 #f56565 outlined
 l2 #ed8936 outlined
-other ##38b2ac
+other #38b2ac

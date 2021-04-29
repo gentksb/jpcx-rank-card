@@ -54,10 +54,41 @@ export const getAjoccRankingData = async (props: Props) => {
       }))
     )
 
-    return {
-      racerInfoData,
-      ajoccRankingData
+    //データを正規化
+    const categoryRegExp = RegExp(
+      "C1|C2|C3|C4|CM1|CM2|CM3|CL1|CL2|CL3|U17|CJ|U15/g"
+    )
+    const racerCategory = racerInfoData["カテゴリー"].match(categoryRegExp)
+    const normalizeAjoccRankingData = ajoccRankingData.map(
+      (seasonResult, index) => {
+        const seasonCategory = seasonResult.season.match(categoryRegExp)
+        return {
+          season: seasonResult.season.slice(0, 7),
+          category: seasonCategory !== null ? seasonCategory[0] : "Err",
+          seasonRank: seasonResult.rank.slice(
+            0,
+            seasonResult.rank.indexOf("(") - 1
+          ),
+          seasonPoint: seasonResult.rank.slice(
+            seasonResult.rank.indexOf("(") + 1,
+            seasonResult.rank.indexOf("pt")
+          )
+        }
+      }
+    )
+
+    const ajoccRacerData = {
+      racerInfoData: {
+        ajoccCode: ajoccCode,
+        category: racerCategory !== null ? racerCategory[0] : "Err",
+        name: racerInfoData.Name,
+        team: racerInfoData["チーム"],
+        jcfNo: racerInfoData["JCF No."]
+      },
+      ajoccRankingData: normalizeAjoccRankingData
     }
+
+    return ajoccRacerData
   } catch (error) {
     console.error(error)
   }
