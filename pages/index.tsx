@@ -1,4 +1,5 @@
 import Head from "next/head"
+// @ts-ignore
 import styles from "../styles/Home.module.css"
 import { Input, Heading, Button, Box, Code, Image } from "@chakra-ui/react"
 import { useState } from "react"
@@ -6,13 +7,15 @@ import { useState } from "react"
 export default function Home() {
   const [isGenerated, setIsGenerated] = useState(false)
   const [ajoccCode, setAjoccCode] = useState("")
+  const [urlQuery, setUrlQuery] = useState("")
 
   const buttonClickHandler = () => {
     setIsGenerated(true)
+    setUrlQuery(ajoccCode)
     return
   }
 
-  const inputHandler = (event) => {
+  const inputHandler = (event: any) => {
     console.log(event.target.value)
     setAjoccCode(event.target.value)
   }
@@ -38,16 +41,15 @@ export default function Home() {
           <>
             <Box margin={2}>
               <Image
-                src={`/ajoccRankCard.png?ajoccCode=${ajoccCode}`}
+                src={`/ajoccRankCard.png?ajoccCode=${urlQuery}`}
                 alt="your ranking card"
+                fallbackSrc="https://via.placeholder.com/350x165"
               />
             </Box>
             <Heading as="h3" size="md">
               URL sample
             </Heading>
-            <Code>
-              https://hostname/ajoccRankCard.png?ajoccCode={ajoccCode}
-            </Code>
+            <Code>https://hostname/ajoccRankCard.png?ajoccCode={urlQuery}</Code>
           </>
         ) : (
           <></>

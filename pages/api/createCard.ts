@@ -40,7 +40,9 @@ export default async (request: VercelRequest, response: VercelResponse) => {
       ctx.fillRect(0, 0, 350, 165)
 
       //背景円
+      // @ts-ignore
       ctx.fillStyle = colorMap[racerData?.racerInfoData.category] ?? "#38b2ac"
+      // @ts-ignore
       ctx.strokeStyle = colorMap[racerData?.racerInfoData.category] ?? "#38b2ac"
       ctx.lineWidth = 5
       ctx.beginPath()
