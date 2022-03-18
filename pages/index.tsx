@@ -44,11 +44,11 @@ export default function Home() {
               <Image
                 src={`/ajoccRankCard.png?ajoccCode=${urlQuery}`}
                 alt="your ranking card"
-                fallbackSrc="https://via.placeholder.com/350x165"
+                fallbackSrc="https://via.placeholder.com/350x165?text=Loading"
               />
             </Box>
             <Heading as="h3" size="md">
-              URL sample
+              YOUR CARD LINK
             </Heading>
             <Code>
               https://jpcx-rank-card.vercel.app/ajoccRankCard.png?ajoccCode=
