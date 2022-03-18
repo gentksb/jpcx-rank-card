@@ -10,6 +10,7 @@ export default function Home() {
   const [urlQuery, setUrlQuery] = useState("")
 
   const buttonClickHandler = () => {
+    const upperCaseAjoccCode = ajoccCode.toUpperCase()
     setIsGenerated(true)
     setUrlQuery(ajoccCode)
     return
@@ -28,8 +29,8 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <Heading>AJOCC Ranking Card Generetor</Heading>
-        <Box width="lg" margin="5">
+        <Heading textAlign="center">AJOCC Ranking Card Generetor</Heading>
+        <Box maxWidth="lg" margin="5">
           <Input placeholder="XTK-000-0000" size="lg" onChange={inputHandler} />
         </Box>
         <Box>
