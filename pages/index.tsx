@@ -43,7 +43,7 @@ export default function Home() {
               <Image
                 src={`/ajoccRankCard.png?ajoccCode=${urlQuery}`}
                 alt="your ranking card"
-                fallbackSrc="https://via.placeholder.com/350x165?Text=Loading"
+                fallbackSrc="https://via.placeholder.com/350x165?text=Loading"
               />
             </Box>
             <Heading as="h3" size="md">
