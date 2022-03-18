@@ -6,7 +6,7 @@ import path from "path"
 export default async (request: VercelRequest, response: VercelResponse) => {
   const { ajoccCode, showRealName, showTeamName } = request.query
   const timestamp = new Date()
-  const timeRecord = `${timestamp.getUTCFullYear()}.${timestamp.getMonth()}.${timestamp.getDate()}`
+  const timeRecord = `${timestamp.getUTCFullYear()}.${timestamp.getMonth()+1}.${timestamp.getDate()}`
 
   const colorMap = {
     C1: "#f56565",
