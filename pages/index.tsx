@@ -47,7 +47,7 @@ export default function Home() {
               />
             </Box>
             <Heading as="h3" size="md">
-              URL sample
+              YOUR CARD LINK
             </Heading>
             <Code>
               https://jpcx-rank-card.vercel.app/ajoccRankCard.png?ajoccCode=
