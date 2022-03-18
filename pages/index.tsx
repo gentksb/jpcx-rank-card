@@ -12,7 +12,7 @@ export default function Home() {
   const buttonClickHandler = () => {
     const upperCaseAjoccCode = ajoccCode.toUpperCase()
     setIsGenerated(true)
-    setUrlQuery(ajoccCode)
+    setUrlQuery(upperCaseAjoccCode)
     return
   }
 
