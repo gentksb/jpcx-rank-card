@@ -9,14 +9,22 @@ export default async (request: VercelRequest, response: VercelResponse) => {
   const timeRecord = `${timestamp.getUTCFullYear()}.${timestamp.getMonth()+1}.${timestamp.getDate()}`
 
   const colorMap = {
-    C1: "#f56565",
-    C2: "#ed8936",
-    C3: "#48bb78",
-    CM1: "#ed64a6",
-    CM2: "#9f7aea",
-    CM3: "#667eea",
-    L1: "#f56565",
-    L2: "#ed8936"
+    ME1: "#f56565",
+    ME2: "#ed8936",
+    ME3: "#48bb78",
+    ME4: "#48bb78",
+    MM1: "#ed64a6",
+    MM2: "#9f7aea",
+    MM3: "#667eea",
+    MM35: "#667eea",
+    MM40: "#667eea",
+    MM50: "#667eea",
+    MM60: "#667eea",
+    WE1: "#f56565",
+    WE2: "#ed8936",
+    MJ: "#48bb78",
+    MU17: "#48bb78",
+    MU15: "#48bb78",
   }
 
   if (ajoccCode === undefined) {
